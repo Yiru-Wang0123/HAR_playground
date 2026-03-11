@@ -1,0 +1,18 @@
+[Unit]
+Description=HR + Step Counter (OLED + CSV logging)
+After=multi-user.target
+
+[Service]
+Type=simple
+User=yiru
+WorkingDirectory=/home/yiru/wyr
+Environment=PATH=/home/yiru/KIN8248_2026/bin:/usr/bin:/bin
+ExecStartPre=/bin/stty -F /dev/ttyACM0 115200
+ExecStart=/home/yiru/KIN8248_2026/bin/python3 /home/yiru/wyr/hr_distance.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
